@@ -2,7 +2,7 @@
 
 A full-stack AI-powered virtual assistant web application that lets users chat with an AI assistant, manage their account securely, and customize the assistant's appearance and name.
 
-🔗 **Live Demo:** 
+🔗 **Live Demo:** https://virtual-assistant-alpha-five.vercel.app **
 
 ---
 
