@@ -6,6 +6,7 @@ import { getGroqResponse, logout } from "@/app/services/api"
 import { IoMenu } from "react-icons/io5"
 import { RxCross1 } from "react-icons/rx"
 import { setUserData } from "@/app/redux/slices/userSlice"
+import { toast } from "react-toastify"
 
 export default function Dashboard() {
 
@@ -294,10 +295,10 @@ export default function Dashboard() {
 
       {/* customize buttons */}
       <button className="lg:block hidden min-w-[150px] cursor-pointer h-[60px] mt-[30px] text-white font-semibold
-         absolute bg-[#00000035] border rounded-full text-[19px] top-5 right-5 p-4 " onClick={() => router.push("/components/customize")}>Customize Your Assistant</button>
+         absolute bg-[#00000035] border rounded-full text-[19px] top-5 right-5 p-4 active:bg-white active:text-black " onClick={() => router.push("/components/customize")}>Customize Your Assistant</button>
 
       <button className="lg:block hidden lg:min-w-[150px] cursor-pointer lg:h-[50px] mt-[30px] text-white font-semibold
-         absolute  rounded-full text-[19px] top-25 right-5 p-2 bg-[#00000035] border" onClick={handleLogOut}>Log Out</button>
+         absolute  rounded-full text-[19px] top-25 right-5 p-2 bg-[#00000035] border active:bg-white active:text-black" onClick={handleLogOut}>Log Out</button>
 
       {/* ------- */}
       <div className="w-[300px] h-[360px] flex justify-center items-center overflow-hidden
