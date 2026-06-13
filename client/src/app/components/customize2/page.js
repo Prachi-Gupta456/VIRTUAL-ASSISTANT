@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { setAssistantName } from "@/app/services/api"
 import { setUserData } from "@/app/redux/slices/userSlice"
+import { ClipLoader } from "react-spinners"
 
 export default function Customize() {
 
@@ -11,9 +12,11 @@ export default function Customize() {
     const router = useRouter()
     const [name, setName] = useState(userData?.assistantName || "")
     const dispatch = useDispatch()
+    const [pending, setPending] = useState(false)
 
     const handleAssistantName = async () => {
-
+        
+        setPending(true)
         const result = await setAssistantName({ name })
 
         if (!result.success) {
@@ -22,8 +25,9 @@ export default function Customize() {
             setName("")
             return;
         }
-         dispatch(setUserData(result.user))
-        router.push("/")
+        dispatch(setUserData(result.user))
+        setPending(false)
+        router.push("/components/dashboard")
     }
 
     useEffect(() => {
@@ -52,7 +56,7 @@ export default function Customize() {
             {/* button */}
             {name.length > 0 && <button className="min-w-[300px] cursor-pointer h-[60px] mt-[30px] text-black font-semibold
                 bg-white rounded-full text-[19px]"
-                onClick={handleAssistantName}>Create Your Assistant</button>
+                onClick={handleAssistantName} disabled={pending}>{pending ? <ClipLoader size={20} color="white" /> : "Create Your Assistant"}</button>
             }
 
         </div>

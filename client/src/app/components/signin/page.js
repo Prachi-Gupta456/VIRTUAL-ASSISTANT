@@ -40,7 +40,7 @@ export default function Register() {
 
         toast.success(result.msg)
         clearForm()
-        router.push("/")
+        router.push("/components/dashboard")
     }
 
     return (
@@ -53,7 +53,7 @@ export default function Register() {
             backdrop-blur shadow-lg px-5 shadow-black flex flex-col items-center gap-5 p-5">
 
                 <h1 className="text-white text-[30px] font-semibold mb-[30px]">
-                    Register to <span className="text-blue-400">Virtual Assistant</span>
+                    Sign In to <span className="text-blue-400">Virtual Assistant</span>
                 </h1>
 
                 {/* Email */}
@@ -79,7 +79,7 @@ export default function Register() {
 
 
                 <button disabled={pending} className="min-w-[150px] cursor-pointer h-[60px] mt-[30px] text-black font-semibold
-                bg-white rounded-full text-[19px]">{pending ? <ClipLoader size={20} color="black" /> : "Register"}</button>
+                bg-white rounded-full text-[19px]">{pending ? <ClipLoader size={20} color="black" /> : "Sign In"}</button>
 
                 <p className="text-white text-[18px]">Want to create an account ?
                     <Link href="/components/register" className="text-blue-400 cursor-pointer"> Sign Up</Link>

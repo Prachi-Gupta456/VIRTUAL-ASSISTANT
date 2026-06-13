@@ -79,7 +79,7 @@ export const askToAssistantService = async (userId, command) => {
 
     const user = await User.findByIdAndUpdate(userId,
         { $push: { history: command } },
-        { returnDocument: "after" }).lean()
+        { returnDocument: "after" }).select("-email -password").lean()
 
     if (!user) {
         throw new ApiError(404, "User not found", true)
@@ -94,7 +94,7 @@ export const askToAssistantService = async (userId, command) => {
         }
     }
 
-    if (command.includes("time")  && command.includes("current")) {
+    if (command.includes("time") && command.includes("current")) {
         return {
             type: "get_time",
             userInput: command,
@@ -104,7 +104,7 @@ export const askToAssistantService = async (userId, command) => {
 
     }
 
-    if (command.includes("day")  && command.includes("today")) {
+    if (command.includes("day") && command.includes("today")) {
         return {
             type: "get_day",
             userInput: command,
@@ -113,7 +113,7 @@ export const askToAssistantService = async (userId, command) => {
         }
     }
 
-    if (command.includes("month")  && command.includes("current")) {
+    if (command.includes("month") && command.includes("current")) {
         return {
             type: "get_month",
             userInput: command,
