@@ -48,18 +48,18 @@ export const refreshTokenService = async (refresh_token) => {
 export const signupService = async (name, email, password) => {
 
     if (!name || !email || !password) {
-        throw new ApiError(400,"Missing required fields.",true)
+        throw new ApiError(400, "Missing required fields.", true)
     }
 
     // check whether user already exists 
     const user = await User.findOne({ email })
 
     if (user) {
-        throw new ApiError(403, "User already exists.",true)
+        throw new ApiError(403, "User already exists.", true)
     }
 
-    if(password.length < 6){
-         throw new ApiError(400,"Password must contain atleast 6 characters!",true)
+    if (password.length < 6) {
+        throw new ApiError(400, "Password must contain atleast 6 characters!", true)
     }
     // hash password
     const hashed_password = await bcrypt.hash(password, 10)
@@ -82,21 +82,21 @@ export const signupService = async (name, email, password) => {
 export const signinService = async (email, password) => {
 
     if (!email || !password) {
-        throw new ApiError(400,"Missing required fields.",true)
+        throw new ApiError(400, "Missing required fields.", true)
     }
 
     // check whether user already exists 
     const user = await User.findOne({ email })
 
     if (!user) {
-        throw new ApiError(404,"User not found.",true)
+        throw new ApiError(404, "User not found.", true)
     }
 
     // hash password
     const match = await bcrypt.compare(password, user.password)
 
     if (!match) {
-        throw new ApiError(401,"Wrong Password",true)
+        throw new ApiError(401, "Wrong Password", true)
     }
 
     // set jwt token
@@ -116,6 +116,9 @@ export const signinService = async (email, password) => {
 export const logoutService = async (refresh_token) => {
 
     try {
+         
+        if (!refresh_token) return;
+
         const decoded = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET)
 
         //   remove from cache
